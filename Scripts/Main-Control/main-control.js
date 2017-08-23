@@ -1,7 +1,6 @@
 var audio = document.createElement("audio");
 audio.setAttribute("src","./Assets/Audio/song.mp3");
-var gameOverImg = new Image();
-gameOverImg.src = "./Assets/Image/GameOver.jpg";
+
 var gameOverAudio = document.createElement("audio");
 gameOverAudio.setAttribute("src","./Assets/Audio/EvilLaugh.mp3");
 var gameWinImg = new Image();
@@ -11,9 +10,9 @@ gameWinAudio.setAttribute("src","./Assets/Audio/Victory.mp3");
 
 var score = 0;
 var time=1;
-var dead=false;
-var win=false;
 var mainUpdateInterval ;
+var endInt;
+
 //initGame();
 
 function initGame()
@@ -44,16 +43,28 @@ function update()
 function gameEnd()
 {  
    clearInterval(mainUpdateInterval);
-   dead=true;
+   clearInterval(timerId);
+   gameOverImg.src = "./Assets/Image/GameOver.jpg";
+   endInt=setInterval(updateEndUI, 1000/frames);
    audio.pause();
-   gameOverAudio.play();
+   startAudio.play();
+   startAudio.loop=true;
+   time=0;
+   score=0;
+   
 }
 
 function gameWin()
 {  
    clearInterval(mainUpdateInterval);
-   win=true;
+   clearInterval(timerId);
+   gameOverImg.src="./Assets/Image/GameWin.jpg";
+   endInt=setInterval(updateEndUI, 1000/frames);
+   startAudio.pause();
+   time=0;
+   score=0;
    audio.pause();
    gameWinAudio.play();
+   gameWinAudio.loop=true;
 }
 

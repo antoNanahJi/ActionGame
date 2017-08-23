@@ -33,6 +33,5 @@ function render()
 			surface.fillStyle = "Yellow";
 			surface.fillText("Timer: " + time , 550 , 25 );
 			
-	if(dead==true)surface.drawImage(gameOverImg,0,0,700, 600);
-	if(win==true)surface.drawImage(gameWinImg,0,0,700, 600);
+	
 }
